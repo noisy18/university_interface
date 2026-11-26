@@ -24,14 +24,26 @@ const form = document.querySelector("#analyzer");
 if (form) {
   const message = document.querySelector("#message");
   const counter = document.querySelector("#counter");
+  const validation = document.querySelector("#message-error");
+  const submit = form.querySelector("[type=submit]");
+  const showError = text => {
+    validation.hidden = !text;
+    validation.textContent = text;
+    message.setAttribute("aria-invalid", String(Boolean(text)));
+    if (text) message.focus();
+  };
   const update = () => {
-    message.setCustomValidity("");
+    showError("");
     counter.value = `${message.value.length} / ${message.maxLength}`;
   };
   const previous = readCheck();
   if (previous?.stage === "pending") message.value = previous.text;
   try { sessionStorage.removeItem(key); } catch {}
   update();
+  window.addEventListener("pageshow", () => {
+    submit.disabled = false;
+    submit.removeAttribute("aria-busy");
+  });
 
   message.addEventListener("input", update);
   for (const button of document.querySelectorAll("[data-example]")) {
@@ -46,17 +58,18 @@ if (form) {
   form.addEventListener("submit", event => {
     event.preventDefault();
     const text = message.value.trim();
-    if (!text) {
-      message.setCustomValidity("Вставьте сообщение для проверки.");
-      message.reportValidity();
+    if (submit.disabled) return;
+    if (!text || message.value.length > message.maxLength) {
+      showError(text ? "Сократите сообщение до 4000 символов." : "Вставьте сообщение, чтобы начать проверку.");
       return;
     }
     try {
       sessionStorage.setItem(key, JSON.stringify({ text, stage: "pending" }));
+      submit.disabled = true;
+      submit.setAttribute("aria-busy", "true");
       location.assign(form.action);
     } catch {
-      message.setCustomValidity("Браузер запретил временное хранение данных вкладки.");
-      message.reportValidity();
+      showError("Браузер запретил временное хранение данных вкладки. Разрешите хранение и попробуйте снова.");
     }
   });
 }
@@ -65,27 +78,37 @@ const check = form ? null : readCheck();
 if (page.hasAttribute("data-analysis")) {
   const card = document.querySelector(".progress-card");
   const title = document.querySelector("#progress-title");
-  const status = document.querySelector(".progress-status");
+  const status = document.querySelector("#loader");
+  const notice = document.querySelector("#analysis-error");
+  const saved = document.querySelector(".saved-message");
   const progress = document.querySelector("#demo-progress");
   const error = document.querySelector("#demo-error");
   const retry = document.querySelector("#retry");
   let timer;
 
-  function setProgress(failed) {
+  function setProgress(failed, reason = "Демонстрационный сбой. Повторите проверку, чтобы продолжить.") {
     clearTimeout(timer);
     card.toggleAttribute("data-error", failed);
-    title.textContent = failed ? "Не удалось проверить сообщение" : "Проверяем сообщение";
-    status.textContent = failed ? "Произошёл сбой при проверке" : "Формирование отчета безопасности…";
+    title.textContent = failed ? "Не удалось проверить сообщение" : "Анализируем сообщение";
+    status.dataset.stage = failed ? "waiting" : "running";
+    status.textContent = failed ? "Анализ остановлен" : "Формируем отчёт безопасности…";
+    notice.hidden = !failed;
+    notice.textContent = failed ? reason : "";
+    saved.hidden = !failed || !check?.text;
     progress.setAttribute("aria-pressed", String(!failed));
     error.setAttribute("aria-pressed", String(failed));
     retry.hidden = !failed;
+    progress.disabled = !failed && check?.stage === "pending";
     if (!failed && check?.stage === "pending") {
       timer = setTimeout(() => {
-        const risk = rules.some(([pattern]) => pattern.test(check.text)) ? "high" : "low";
+        const matches = rules.filter(([pattern]) => pattern.test(check.text)).length;
+        const risk = matches > 1 ? "high" : matches === 1 || check.text.length < 5 ? "medium" : "low";
+        status.dataset.stage = "done";
+        status.textContent = "Проверка завершена";
         try {
           sessionStorage.setItem(key, JSON.stringify({ ...check, stage: "result", risk }));
-          location.replace(`result-${risk}.html`);
-        } catch { setProgress(true); }
+          location.replace(risk === "low" ? "result-low.html" : "result-high.html");
+        } catch { setProgress(true, "Браузер не сохранил результат. Попробуйте повторить проверку."); }
       }, 1100);
     }
   }
@@ -94,25 +117,36 @@ if (page.hasAttribute("data-analysis")) {
   error.addEventListener("click", () => setProgress(true));
   retry.addEventListener("click", () => setProgress(false));
   if (check?.stage === "pending") {
-    document.querySelector(".connection p:first-child").lastChild.textContent = "Проверка в браузере";
-    document.querySelector(".connection p:last-child").textContent = "Текст временно хранится в этой вкладке и очищается при новой проверке.";
+    saved.querySelector("p").textContent = check.text;
   }
   setProgress(false);
 }
 
-if (check?.stage === "result" && page.dataset.report === check.risk) {
+if (check?.stage === "result" && page.dataset.report === (check.risk === "low" ? "low" : "high")) {
+  document.querySelector("[data-demo-label]").hidden = true;
+  document.querySelector(".confidence").textContent = "Уверенность модели недоступна · локальная проверка по текстовым правилам";
   document.querySelector("#checked-message").textContent = `«${check.text}»`;
   document.querySelector("#snippet-length").textContent = `${check.text.length} симв.`;
   for (const sample of page.querySelectorAll("[data-sample]")) sample.hidden = true;
 
-  if (check.risk === "high") {
+  if (check.risk !== "low") {
     document.querySelector("[data-sample]").replaceWith("Результат проверки");
     document.querySelector("#verdict-title").textContent = "Обнаружены признаки риска";
     document.querySelector("#verdict-description").textContent = "Локальная проверка выявила признаки, которые стоит изучить перед тем, как действовать.";
     const findings = document.querySelector("#risk-findings");
+    const matches = rules.filter(([pattern]) => pattern.test(check.text));
+    if (check.risk === "medium") {
+      page.querySelector(".verdict").dataset.risk = "medium";
+      const badge = page.querySelector(".badge");
+      badge.dataset.risk = "medium";
+      badge.textContent = "Средний риск";
+      page.querySelector(".severity p").textContent = "Нужна дополнительная проверка";
+      page.querySelector("#verdict-title").textContent = matches.length ? "Подозрительное сообщение" : "Недостаточно данных";
+      page.querySelector("#verdict-description").textContent = matches.length ? "Обнаружен один признак. Проверьте отправителя через официальный канал." : "Сообщение слишком короткое для однозначной оценки. Добавьте контекст или уточните запрос у отправителя.";
+    }
     const template = findings.firstElementChild.cloneNode(true);
     template.querySelector(".finding-icon").remove();
-    findings.replaceChildren(...rules.filter(([pattern]) => pattern.test(check.text)).map(([, heading, copy]) => {
+    findings.replaceChildren(...(matches.length ? matches : [[null, "Недостаточно контекста", "Проверьте сообщение целиком, если оно доступно."]]).map(([, heading, copy]) => {
       const item = template.cloneNode(true);
       item.querySelector("h3").textContent = heading;
       item.querySelector("p").textContent = copy;

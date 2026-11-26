@@ -32,13 +32,15 @@
         <blockquote id="checked-message">«Привет! Это сотрудник деканата. Тебе нужно срочно подтвердить студенческий аккаунт по ссылке https://student-check.example, иначе доступ к личному кабинету будет заблокирован сегодня.»</blockquote>
       </div>
     </figure>
-    <article class="verdict">
+    <p class="notice" data-tone="warning" data-demo-label>Учебный пример. Процент уверенности приведён для демонстрации интерфейса.</p>
+    <article class="verdict" data-risk="high">
       <header class="verdict-banner">
         <div class="verdict-summary">
           <span class="verdict-icon"><img src="assets/warning.svg" alt=""></span>
           <div>
-            <div class="verdict-meta"><span class="badge">Высокий риск</span><small data-sample>Категория: Фишинг учетных данных</small></div>
+            <div class="verdict-meta"><span class="badge" data-risk="high">Высокий риск</span><small data-sample>Категория: Фишинг учетных данных</small></div>
             <h2 id="verdict-title">Возможный фишинг</h2>
+            <p class="confidence">Уверенность модели (демо) — 98%</p>
           </div>
         </div>
         <div class="severity"><small>Уровень критичности</small><p>Требуется внимание</p></div>
@@ -48,17 +50,17 @@
       <section class="report-column">
         <h2>Почему сообщение подозрительное?</h2>
         <ul class="findings" id="risk-findings">
-          <li class="finding"><span class="finding-icon"><img src="assets/urgency.svg" alt=""></span><div><h3>Требование срочного действия</h3><p>Отправитель искусственно создаёт ощущение нехватки времени, принуждая совершить ошибку без проверки.</p></div></li>
-          <li class="finding"><span class="finding-icon"><img src="assets/block.svg" alt=""></span><div><h3>Угроза блокировки</h3><p>Сообщение давит на страх потери доступа к учебным материалам и кабинету, чтобы обойти бдительность.</p></div></li>
-          <li class="finding"><span class="finding-icon"><img src="assets/external.svg" alt=""></span><div><h3>Ссылка для подтверждения</h3><p>Предлагается перейти на сайт<br><code>student-check.example</code>, принадлежность которого университету не подтверждена.</p></div></li>
+          <li class="finding" data-tone="warning"><span class="finding-icon"><img src="assets/urgency.svg" alt=""></span><div><h3>Требование срочного действия</h3><p>Отправитель искусственно создаёт ощущение нехватки времени, принуждая совершить ошибку без проверки.</p></div></li>
+          <li class="finding" data-tone="warning"><span class="finding-icon"><img src="assets/block.svg" alt=""></span><div><h3>Угроза блокировки</h3><p>Сообщение давит на страх потери доступа к учебным материалам и кабинету, чтобы обойти бдительность.</p></div></li>
+          <li class="finding" data-tone="warning"><span class="finding-icon"><img src="assets/external.svg" alt=""></span><div><h3>Ссылка для подтверждения</h3><p>Предлагается перейти на сайт<br><code>student-check.example</code>, принадлежность которого университету не подтверждена.</p></div></li>
         </ul>
       </section>
       <section class="report-column">
         <h2>Что рекомендуем сделать</h2>
         <ul class="findings">
-          <li class="finding"><span class="finding-icon"><img src="assets/dont-open.svg" alt=""></span><div><h3>Не переходите по ссылке</h3><p>Адрес может вести на поддельную копию портала входа или содержать скрипты перехвата сессии.</p></div></li>
-          <li class="finding"><span class="finding-icon"><img src="assets/dont-share.svg" alt=""></span><div><h3>Не вводите логин и пароль</h3><p>Сотрудники деканата и системные администраторы никогда не запрашивают верификацию пароля в мессенджерах.</p></div></li>
-          <li class="finding"><span class="finding-icon"><img src="assets/verify.svg" alt=""></span><div><h3>Проверьте информацию официально</h3><p>Откройте доверенный сайт университета из закладок браузера или свяжитесь с куратором группы.</p></div></li>
+          <li class="finding" data-tone="warning"><span class="finding-icon"><img src="assets/dont-open.svg" alt=""></span><div><h3>Не переходите по ссылке</h3><p>Адрес может вести на поддельную копию портала входа или содержать скрипты перехвата сессии.</p></div></li>
+          <li class="finding" data-tone="warning"><span class="finding-icon"><img src="assets/dont-share.svg" alt=""></span><div><h3>Не вводите логин и пароль</h3><p>Сотрудники деканата и системные администраторы никогда не запрашивают верификацию пароля в мессенджерах.</p></div></li>
+          <li class="finding" data-tone="warning"><span class="finding-icon"><img src="assets/verify.svg" alt=""></span><div><h3>Проверьте информацию официально</h3><p>Откройте доверенный сайт университета из закладок браузера или свяжитесь с куратором группы.</p></div></li>
         </ul>
       </section>
       </div>

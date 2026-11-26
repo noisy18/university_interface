@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Практика №4 - СТОПСПАМ</title>
+  <link rel="stylesheet" href="../../site/styles.css">
+  <link rel="stylesheet" href="../../site/report.css">
+  <link rel="stylesheet" href="preview.css">
+  <script src="preview.js" defer></script>
+</head>
+<body>
+  <header class="header"><div class="shell header-inner">
+    <a href="../../site/" class="logo" aria-label="Стоп-Спам — к проверке"><img src="../../site/assets/logo.png" alt="СтопСпам"></a>
+    <nav class="preview-nav" aria-label="Материалы практики">
+      <a href="?view=system">Токены</a><a href="?view=components">Компоненты</a><a href="?view=empty">Состояния</a><a href="?view=stress">Стресс-тест</a>
+    </nav>
+  </div></header>
+  <main class="shell main preview" id="preview"></main>
+  <template id="system">
+    <header class="preview-title"><p>Практика №4</p><h1>Дизайн-система СТОПСПАМ</h1><p>Токены интерфейса проверки сообщений</p></header>
+    <section><h2>Цвета</h2><ul class="swatches" id="swatches"></ul></section>
+    <div class="preview-grid">
+      <section class="preview-panel"><h2>Типографика · Inter</h2><p class="type-page">Заголовок страницы</p><p class="type-section">Заголовок блока</p><p>Основной текст</p><p class="type-secondary">Вторичный текст</p><p class="type-caption">Подпись</p></section>
+      <section class="preview-panel"><h2>Отступы</h2><ul class="space-list" id="spacing"></ul><h2>Скругления</h2><div class="showcase-row" id="radii"></div></section>
+    </div>
+  </template>
+  <template id="components">
+    <header class="preview-title"><p>Практика №4</p><h1>Компоненты и состояния</h1><p>Те же классы используются на экранах проверки и отчёта.</p></header>
+    <section class="preview-panel"><h2>Кнопка</h2><div class="showcase-row actions-demo">
+      <button class="action primary" type="button">Основная</button><button class="action" type="button">Вторичная</button>
+      <button class="action primary" type="button" data-preview="hover">Наведение</button><button class="action primary" type="button" data-preview="active">Нажатие</button>
+      <button class="action" type="button" data-preview="focus">Фокус</button><button class="action" type="button" disabled>Недоступна</button><button class="action primary" type="button" disabled aria-busy="true"><span class="loader" data-stage="running">Загрузка</span></button>
+    </div></section>
+    <section><h2>Поле ввода сообщения</h2><div class="preview-grid fields">
+      <label>Обычное<textarea class="message-input" placeholder="Вставьте сообщение…"></textarea></label>
+      <label>Фокус<textarea class="message-input" data-preview="focus" placeholder="Вставьте сообщение…"></textarea></label>
+      <label>Заполненное<textarea class="message-input" placeholder="Вставьте сообщение…">Встреча завтра в 10:00.</textarea></label>
+      <label>Ошибка<textarea class="message-input" aria-invalid="true" placeholder="Вставьте сообщение…" aria-describedby="preview-error"></textarea><span id="preview-error" class="type-caption">Вставьте сообщение для проверки.</span></label>
+      <label>Недоступное<textarea class="message-input" disabled placeholder="Идёт проверка…"></textarea></label>
+    </div></section>
+    <section><h2>Карточка результата и индикатор риска</h2><div class="preview-grid three">
+      <article class="verdict" data-risk="low"><header class="verdict-banner"><span class="badge" data-risk="low">Низкий риск</span><h3>Вероятно безопасно</h3><p>Правила не нашли явных признаков угрозы.</p></header></article>
+      <article class="verdict" data-risk="medium"><header class="verdict-banner"><span class="badge" data-risk="medium">Средний риск</span><h3>Подозрительное сообщение</h3><p>Проверьте отправителя через известный канал.</p></header></article>
+      <article class="verdict" data-risk="high"><header class="verdict-banner"><span class="badge" data-risk="high">Высокий риск</span><h3>Возможный фишинг</h3><p>Сообщение содержит несколько признаков риска.</p></header></article>
+    </div></section>
+    <section><h2>Уведомления</h2><div class="preview-grid three"><p class="notice" data-tone="success"><strong>Готово</strong>Проверка завершена.</p><p class="notice" data-tone="warning"><strong>Требуется внимание</strong>Проверьте отправителя.</p><p class="notice" data-tone="error"><strong>Не удалось проверить</strong>Попробуйте снова.</p></div></section>
+    <section><h2>Карточка обнаруженного признака</h2><ul class="preview-grid finding-list">
+      <li class="finding" data-tone="warning"><span class="finding-icon" aria-hidden="true">!</span><div><span class="finding-state">Обнаружен</span><h3>Просьба подтвердить аккаунт</h3><p>Уточните запрос через официальный канал.</p></div></li>
+      <li class="finding" data-tone="success"><span class="finding-icon" aria-hidden="true">✓</span><div><span class="finding-state">Не обнаружен</span><h3>Запрос реквизитов</h3><p>Правила не выявили запроса платёжных данных.</p></div></li>
+    </ul></section>
+    <section class="preview-panel"><h2>Индикатор загрузки</h2><div class="showcase-row"><p class="loader" data-stage="waiting">Ожидание сообщения</p><p class="loader" data-stage="running">Анализируем сообщение</p><p class="loader" data-stage="done">Проверка завершена</p></div></section>
+  </template>
+  <template id="empty">
+    <header class="preview-title"><p>Проверка сообщения</p><h1>Результат проверки</h1></header>
+    <section class="progress-card empty-card" aria-labelledby="empty-title">
+      <div class="progress-icon"><img src="../../site/assets/analysis-shield.svg" alt=""></div>
+      <h2 id="empty-title">Проверок пока нет</h2>
+      <p>Здесь появятся оценка риска, обнаруженные признаки и рекомендации.</p>
+      <ol><li>Откройте форму и вставьте текст в поле «Сообщение для проверки».</li><li>Нажмите «Проверить сообщение», чтобы запустить анализ.</li></ol>
+      <p class="loader" data-stage="waiting">Ожидание сообщения</p>
+      <div><a class="action primary" href="../../site/index.html#message">Перейти к полю ввода</a></div>
+    </section>
+    <div class="showcase-row"><a class="action" href="../../site/analysis.html">Загрузка и сбой</a><a class="action" href="../../site/result-high.html">Пример отчёта</a><a class="action" href="../../site/result-low.html">Низкий риск</a></div>
+  </template>
+  <template id="stress">
+    <header class="preview-title"><p>Практика №4</p><h1>Стресс-тест</h1><p>Фикстуры интерфейса. Проценты демонстрационные.</p></header>
+    <label class="fixture-control">Сценарий <select id="fixture">
+      <option value="uncertain">Неоднозначный ответ · 51%</option><option value="high">Высокая уверенность · 98%</option><option value="long">Длинное объяснение</option><option value="links">Много ссылок</option><option value="sender">Длинный отправитель</option>
+    </select></label>
+    <figure class="snippet"><div class="snippet-body"><figcaption>Проверяемый текст</figcaption><p class="type-caption" id="sender"></p><blockquote id="fixture-message"></blockquote></div></figure>
+    <article class="verdict" id="fixture-report"><header class="verdict-banner"><span class="badge" id="fixture-risk"></span><h2 id="fixture-title"></h2><p class="confidence" id="fixture-confidence"></p></header>
+      <div class="fixture-body"><p id="fixture-copy"></p><p class="notice" data-tone="warning">Свяжитесь с отправителем через известный вам канал.</p></div>
+    </article>
+  </template>
+</body>
+</html>

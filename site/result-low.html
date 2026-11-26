@@ -32,12 +32,13 @@
         <blockquote id="checked-message">«Привет! Напоминаю, что завтра в 10:00 у нас встреча по учебному проекту в аудитории 305. Не забудь подготовить материалы.»</blockquote>
       </div>
     </figure>
-    <article class="verdict">
+    <p class="notice" data-tone="warning" data-demo-label>Учебный пример. Процент уверенности приведён для демонстрации интерфейса.</p>
+    <article class="verdict" data-risk="low">
       <header class="verdict-banner">
-        <div class="verdict-meta"><span class="badge">Низкий риск</span><small class="icon-line"><img src="assets/linguistic.svg" alt="">Детерминированный лингвистический анализ</small></div>
+        <div class="verdict-meta"><span class="badge" data-risk="low">Низкий риск</span><small class="icon-line"><img src="assets/linguistic.svg" alt="">Детерминированный лингвистический анализ</small></div>
         <div class="verdict-summary">
           <span class="verdict-icon"><img src="assets/low-shield.svg" alt=""></span>
-          <div><h2>Явных признаков мошенничества не обнаружено</h2><p>В тексте нет очевидных требований перевести деньги, передать личные данные или срочно перейти по подозрительной ссылке.</p></div>
+          <div><h2>Явных признаков мошенничества не обнаружено</h2><p class="confidence">Уверенность модели (демо) — 92%</p><p>В тексте нет очевидных требований перевести деньги, передать личные данные или срочно перейти по подозрительной ссылке.</p></div>
         </div>
       </header>
       <div class="report-grid">
@@ -45,9 +46,9 @@
         <h2>Что показала проверка</h2>
         <p class="column-caption">3 критерия совпадений</p>
         <ul class="findings">
-          <li class="finding"><span class="finding-icon"><img src="assets/no-payment.svg" alt=""></span><div><h3>Нет требований перевести деньги</h3><p>Отсутствуют финансовые маркеры, номера банковских счетов, криптовалютные кошельки и просьбы срочных переводов.</p></div></li>
-          <li class="finding"><span class="finding-icon"><img src="assets/no-password.svg" alt=""></span><div><h3>Нет просьб сообщить пароли или коды</h3><p>Сообщение не запрашивает учетные данные, коды из SMS, логины или паспортные сведения.</p></div></li>
-          <li class="finding"><span class="finding-icon"><img src="assets/no-links.svg" alt=""></span><div><h3>Нет ссылок на внешние сайты</h3><p>Текст не содержит сокращенных URL, скрытых гиперссылок или редиректов на фишинговые формы.</p></div></li>
+          <li class="finding" data-tone="success"><span class="finding-icon"><img src="assets/no-payment.svg" alt=""></span><div><h3>Нет требований перевести деньги</h3><p>Отсутствуют финансовые маркеры, номера банковских счетов, криптовалютные кошельки и просьбы срочных переводов.</p></div></li>
+          <li class="finding" data-tone="success"><span class="finding-icon"><img src="assets/no-password.svg" alt=""></span><div><h3>Нет просьб сообщить пароли или коды</h3><p>Сообщение не запрашивает учетные данные, коды из SMS, логины или паспортные сведения.</p></div></li>
+          <li class="finding" data-tone="success"><span class="finding-icon"><img src="assets/no-links.svg" alt=""></span><div><h3>Нет ссылок на внешние сайты</h3><p>Текст не содержит сокращенных URL, скрытых гиперссылок или редиректов на фишинговые формы.</p></div></li>
         </ul>
       </section>
       <section class="report-column">

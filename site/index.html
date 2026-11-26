@@ -23,18 +23,18 @@
       <h1 id="title">Проверь сообщение на мошенничество</h1>
       <p>Вставьте подозрительное сообщение для мгновенного анализа на<br class="desktop-break"> мошенничество и фишинг.</p>
     </section>
-    <div class="analyzer">
-      <form class="card" id="analyzer" action="analysis.html">
-        <textarea id="message" aria-label="Сообщение для проверки" aria-describedby="privacy counter" placeholder="Вставьте сообщение для проверки…" maxlength="4000" required></textarea>
-        <div class="toolbar">
-          <p id="privacy" class="privacy"><img src="assets/lock.svg" alt="">Конфиденциально: не отправляйте пароли и коды из SMS</p>
-          <div class="actions">
-            <output id="counter" for="message">0 / 4000</output>
-            <button type="submit" class="send round" aria-label="Проверить сообщение"><img src="assets/send.svg" alt=""></button>
-          </div>
+    <form class="card" id="analyzer" novalidate action="analysis.html">
+      <p id="message-hint" class="message-hint">Подходит текст из SMS, мессенджера, почты или соцсети.</p>
+      <textarea class="message-input" id="message" aria-label="Сообщение для проверки" aria-describedby="message-hint privacy counter message-error" placeholder="Вставьте сообщение для проверки…" maxlength="4000" required></textarea>
+      <p class="notice" data-tone="error" id="message-error" role="alert" hidden></p>
+      <div class="toolbar">
+        <p id="privacy" class="privacy"><img src="assets/lock.svg" alt="">Конфиденциально: не отправляйте пароли и коды из SMS</p>
+        <div class="actions">
+          <output id="counter" for="message">0 / 4000</output>
+          <button type="submit" class="send round action primary" aria-label="Проверить сообщение"><img src="assets/send.svg" alt=""></button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
     <div class="presets">
       <p>Не знаете, что проверить? Попробуйте пример:</p>
       <button type="button" data-example="job"><img src="assets/job.svg" alt="">Подозрительная вакансия</button>
@@ -47,7 +47,7 @@
       </div>
       <ol class="steps">
         <li><span class="step-number" aria-hidden="true">1</span><div><h3>Вставьте сообщение</h3><p>Скопируйте текст из мессенджера или<br class="desktop-break"> почты без личных паролей и платежных<br class="desktop-break"> реквизитов.</p></div></li>
-        <li><span class="step-number" aria-hidden="true">2</span><div><h3>Запустите проверку</h3><p>ML-модель мгновенно проверит текст<br class="desktop-break"> на признаки фишинга, давления и<br class="desktop-break"> контрактных рисков.</p></div></li>
+        <li><span class="step-number" aria-hidden="true">2</span><div><h3>Запустите проверку</h3><p>Сервис проверит текст<br class="desktop-break"> на признаки фишинга, давления и<br class="desktop-break"> контрактных рисков.</p></div></li>
         <li><span class="step-number" aria-hidden="true">3</span><div><h3>Получите рекомендации</h3><p>Узнайте степень опасности, подробную<br class="desktop-break"> расшифровку триггеров и безопасный<br class="desktop-break"> порядок действий.</p></div></li>
       </ol>
     </section>

@@ -22,9 +22,11 @@
   <main class="analysis-shell" data-analysis>
     <section class="progress-card" aria-labelledby="progress-title">
       <div class="progress-icon"><img src="assets/analysis-shield.svg" alt=""></div>
-      <h1 id="progress-title">Проверяем сообщение</h1>
+      <h1 id="progress-title">Анализируем сообщение</h1>
       <p class="progress-copy">Анализируем текст и ищем признаки мошенничества.<br>Обычно это занимает несколько секунд.</p>
-      <p class="progress-status" role="status">Формирование отчета безопасности…</p>
+      <p class="progress-status" role="status"><span id="loader" class="loader" data-stage="running">Формируем отчёт безопасности…</span></p>
+      <p class="notice" data-tone="error" id="analysis-error" role="alert" hidden></p>
+      <details class="saved-message" hidden><summary>Введённое сообщение сохранено</summary><p></p></details>
       <div class="progress-actions">
         <a class="action quiet" href="index.html"><img src="assets/cancel.svg" alt="">Отменить проверку</a>
         <button type="button" class="action primary" id="retry" hidden>Повторить проверку</button>
@@ -37,8 +39,8 @@
       </div>
     </div>
     <aside class="connection">
-      <p class="icon-line"><img src="assets/connection-lock.svg" alt="">Защищенное соединение TLS 1.3</p>
-      <p>Данные проверяются в изолированной среде без сохранения персональных реквизитов.</p>
+      <p class="icon-line"><img src="assets/connection-lock.svg" alt="">Проверка в браузере</p>
+      <p>Текст временно хранится в этой вкладке и очищается при новой проверке.</p>
     </aside>
   </main>
   <dialog id="about"><h2>О проекте</h2><p>Стоп-Спам помогает проверять подозрительные сообщения на мошенничество и фишинг.</p><form method="dialog"><button>Закрыть</button></form></dialog>
