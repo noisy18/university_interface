@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Высокий риск — Стоп-Спам</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="report.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="header">
+    <div class="shell header-inner">
+      <a href="index.html" class="logo" aria-label="Стоп-Спам — на главную"><img src="assets/logo.png" alt="СтопСпам"></a>
+      <nav aria-label="Основная навигация">
+        <a href="index.html#как-это-работает">Как это работает</a>
+        <button type="button" data-dialog="about">О проекте</button>
+        <button type="button" class="profile round" data-dialog="profile" aria-label="Профиль"><img src="assets/profile.svg" alt=""></button>
+      </nav>
+    </div>
+  </header>
+  <main class="report report-high" data-report="high">
+    <div class="report-nav"><p><a href="index.html">Анализатор</a> / <span data-sample>Отчёт безопасности #4829</span></p><a class="action quiet" href="index.html"><img src="assets/high-new.svg" alt="">Новая проверка</a></div>
+    <header class="report-heading">
+      <h1>Результат проверки</h1>
+      <p>Детальный структурный анализ входящего обращения на маркеры социальной инженерии</p>
+    </header>
+    <figure class="snippet">
+      <span class="quote-icon"><img src="assets/high-quote.svg" alt=""></span>
+      <div class="snippet-body">
+        <figcaption><span>ПРОВЕРЕННОЕ СООБЩЕНИЕ</span><small id="snippet-length">Входной фрагмент (157 симв.)</small></figcaption>
+        <blockquote id="checked-message">«Привет! Это сотрудник деканата. Тебе нужно срочно подтвердить студенческий аккаунт по ссылке https://student-check.example, иначе доступ к личному кабинету будет заблокирован сегодня.»</blockquote>
+      </div>
+    </figure>
+    <article class="verdict">
+      <header class="verdict-banner">
+        <div class="verdict-summary">
+          <span class="verdict-icon"><img src="assets/warning.svg" alt=""></span>
+          <div>
+            <div class="verdict-meta"><span class="badge">Высокий риск</span><small data-sample>Категория: Фишинг учетных данных</small></div>
+            <h2 id="verdict-title">Возможный фишинг</h2>
+          </div>
+        </div>
+        <div class="severity"><small>Уровень критичности</small><p>Требуется внимание</p></div>
+      </header>
+      <p class="verdict-intro" id="verdict-description">В сообщении обнаружены признаки попытки получить доступ к вашим данным через психологическое давление и сторонний ресурс.</p>
+      <div class="report-grid">
+      <section class="report-column">
+        <h2>Почему сообщение подозрительное?</h2>
+        <ul class="findings" id="risk-findings">
+          <li class="finding"><span class="finding-icon"><img src="assets/urgency.svg" alt=""></span><div><h3>Требование срочного действия</h3><p>Отправитель искусственно создаёт ощущение нехватки времени, принуждая совершить ошибку без проверки.</p></div></li>
+          <li class="finding"><span class="finding-icon"><img src="assets/block.svg" alt=""></span><div><h3>Угроза блокировки</h3><p>Сообщение давит на страх потери доступа к учебным материалам и кабинету, чтобы обойти бдительность.</p></div></li>
+          <li class="finding"><span class="finding-icon"><img src="assets/external.svg" alt=""></span><div><h3>Ссылка для подтверждения</h3><p>Предлагается перейти на сайт<br><code>student-check.example</code>, принадлежность которого университету не подтверждена.</p></div></li>
+        </ul>
+      </section>
+      <section class="report-column">
+        <h2>Что рекомендуем сделать</h2>
+        <ul class="findings">
+          <li class="finding"><span class="finding-icon"><img src="assets/dont-open.svg" alt=""></span><div><h3>Не переходите по ссылке</h3><p>Адрес может вести на поддельную копию портала входа или содержать скрипты перехвата сессии.</p></div></li>
+          <li class="finding"><span class="finding-icon"><img src="assets/dont-share.svg" alt=""></span><div><h3>Не вводите логин и пароль</h3><p>Сотрудники деканата и системные администраторы никогда не запрашивают верификацию пароля в мессенджерах.</p></div></li>
+          <li class="finding"><span class="finding-icon"><img src="assets/verify.svg" alt=""></span><div><h3>Проверьте информацию официально</h3><p>Откройте доверенный сайт университета из закладок браузера или свяжитесь с куратором группы.</p></div></li>
+        </ul>
+      </section>
+      </div>
+      <div class="report-audit" data-sample>
+        <p class="icon-line"><img src="assets/signature.svg" alt="">Сигнатура: SEC-TRG-7740</p>
+        <p class="icon-line"><img src="assets/domain.svg" alt="">Домен: student-check.example (Неделегирован в edu-зоне)</p>
+        <p>Время проверки: Сегодня, 14:28</p>
+      </div>
+    <footer class="report-footer">
+      <div class="footer-actions">
+        <a class="action primary" href="index.html"><img src="assets/search.svg" alt="">Проверить другое сообщение</a>
+        <button class="action quiet" data-dialog="feedback" type="button"><img src="assets/feedback.svg" alt="">Результат неверный?</button>
+      </div>
+      <p class="icon-line fineprint"><img src="assets/high-info.svg" alt="">Анализ текста не гарантирует 100% точности мошенничества.</p>
+    </footer>
+    </article>
+  </main>
+  <dialog id="about"><h2>О проекте</h2><p>Стоп-Спам помогает проверять подозрительные сообщения на мошенничество и фишинг.</p><form method="dialog"><button>Закрыть</button></form></dialog>
+  <dialog id="profile"><h2>Профиль</h2><p>Проверка сообщений доступна без входа в аккаунт.</p><form method="dialog"><button>Закрыть</button></form></dialog>
+  <dialog id="feedback" aria-labelledby="feedback-title">
+    <h2 id="feedback-title">Результат неверный?</h2>
+    <p>Можно вернуться к форме и проверить сообщение ещё раз. В этой версии отправка отзывов недоступна.</p>
+    <form method="dialog"><button>Закрыть</button></form>
+  </dialog>
+</body>
+</html>

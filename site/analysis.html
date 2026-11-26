@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Процесс анализа — Стоп-Спам</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="report.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="header">
+    <div class="shell header-inner">
+      <a href="index.html" class="logo" aria-label="Стоп-Спам — на главную"><img src="assets/logo.png" alt="СтопСпам"></a>
+      <nav aria-label="Основная навигация">
+        <a href="index.html#как-это-работает">Как это работает</a>
+        <button type="button" data-dialog="about">О проекте</button>
+        <button type="button" class="profile round" data-dialog="profile" aria-label="Профиль"><img src="assets/profile.svg" alt=""></button>
+      </nav>
+    </div>
+  </header>
+  <main class="analysis-shell" data-analysis>
+    <section class="progress-card" aria-labelledby="progress-title">
+      <div class="progress-icon"><img src="assets/analysis-shield.svg" alt=""></div>
+      <h1 id="progress-title">Проверяем сообщение</h1>
+      <p class="progress-copy">Анализируем текст и ищем признаки мошенничества.<br>Обычно это занимает несколько секунд.</p>
+      <p class="progress-status" role="status">Формирование отчета безопасности…</p>
+      <div class="progress-actions">
+        <a class="action quiet" href="index.html"><img src="assets/cancel.svg" alt="">Отменить проверку</a>
+        <button type="button" class="action primary" id="retry" hidden>Повторить проверку</button>
+      </div>
+    </section>
+    <div class="demo">Режим демо:
+      <div class="demo-options">
+        <button type="button" id="demo-progress" aria-pressed="true">В процессе</button>
+        <button type="button" id="demo-error" aria-pressed="false">Сбой</button>
+      </div>
+    </div>
+    <aside class="connection">
+      <p class="icon-line"><img src="assets/connection-lock.svg" alt="">Защищенное соединение TLS 1.3</p>
+      <p>Данные проверяются в изолированной среде без сохранения персональных реквизитов.</p>
+    </aside>
+  </main>
+  <dialog id="about"><h2>О проекте</h2><p>Стоп-Спам помогает проверять подозрительные сообщения на мошенничество и фишинг.</p><form method="dialog"><button>Закрыть</button></form></dialog>
+  <dialog id="profile"><h2>Профиль</h2><p>Проверка сообщений доступна без входа в аккаунт.</p><form method="dialog"><button>Закрыть</button></form></dialog>
+</body>
+</html>

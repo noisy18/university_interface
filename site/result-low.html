@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Низкий риск — Стоп-Спам</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="report.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="header">
+    <div class="shell header-inner">
+      <a href="index.html" class="logo" aria-label="Стоп-Спам — на главную"><img src="assets/logo.png" alt="СтопСпам"></a>
+      <nav aria-label="Основная навигация">
+        <a href="index.html#как-это-работает">Как это работает</a>
+        <button type="button" data-dialog="about">О проекте</button>
+        <button type="button" class="profile round" data-dialog="profile" aria-label="Профиль"><img src="assets/profile.svg" alt=""></button>
+      </nav>
+    </div>
+  </header>
+  <main class="report report-low" data-report="low">
+    <div class="report-nav"><div class="icon-line"><strong data-sample>АНАЛИЗ #8492-OK</strong><span class="meta-dot" data-sample></span><small>Режим: Быстрый эвристический аудит</small></div><a class="action blue-text" href="index.html"><img src="assets/low-new.svg" alt="">Новая проверка</a></div>
+    <header class="report-heading">
+      <h1>Результат проверки</h1>
+      <p class="icon-line"><img src="assets/clock.svg" alt=""><span id="report-timing">Проверено только что • 0.3 сек</span></p>
+    </header>
+    <figure class="snippet">
+      <span class="quote-icon"><img src="assets/low-quote.svg" alt=""></span>
+      <div class="snippet-body">
+        <figcaption><span>Проверенное сообщение:</span><small id="snippet-length">132 символа</small></figcaption>
+        <blockquote id="checked-message">«Привет! Напоминаю, что завтра в 10:00 у нас встреча по учебному проекту в аудитории 305. Не забудь подготовить материалы.»</blockquote>
+      </div>
+    </figure>
+    <article class="verdict">
+      <header class="verdict-banner">
+        <div class="verdict-meta"><span class="badge">Низкий риск</span><small class="icon-line"><img src="assets/linguistic.svg" alt="">Детерминированный лингвистический анализ</small></div>
+        <div class="verdict-summary">
+          <span class="verdict-icon"><img src="assets/low-shield.svg" alt=""></span>
+          <div><h2>Явных признаков мошенничества не обнаружено</h2><p>В тексте нет очевидных требований перевести деньги, передать личные данные или срочно перейти по подозрительной ссылке.</p></div>
+        </div>
+      </header>
+      <div class="report-grid">
+      <section class="report-column">
+        <h2>Что показала проверка</h2>
+        <p class="column-caption">3 критерия совпадений</p>
+        <ul class="findings">
+          <li class="finding"><span class="finding-icon"><img src="assets/no-payment.svg" alt=""></span><div><h3>Нет требований перевести деньги</h3><p>Отсутствуют финансовые маркеры, номера банковских счетов, криптовалютные кошельки и просьбы срочных переводов.</p></div></li>
+          <li class="finding"><span class="finding-icon"><img src="assets/no-password.svg" alt=""></span><div><h3>Нет просьб сообщить пароли или коды</h3><p>Сообщение не запрашивает учетные данные, коды из SMS, логины или паспортные сведения.</p></div></li>
+          <li class="finding"><span class="finding-icon"><img src="assets/no-links.svg" alt=""></span><div><h3>Нет ссылок на внешние сайты</h3><p>Текст не содержит сокращенных URL, скрытых гиперссылок или редиректов на фишинговые формы.</p></div></li>
+        </ul>
+      </section>
+      <section class="report-column">
+        <h2>Рекомендация</h2>
+        <p class="column-caption icon-line protocol"><img src="assets/protocol.svg" alt="">Стандартный протокол</p>
+        <div class="recommendation">
+          <div class="icon-line"><span class="business-icon"><img src="assets/business.svg" alt=""></span><h3>Обычная деловая переписка</h3></div>
+          <p>Сообщение выглядит обычным, но если отправитель вам неизвестен, проверьте его личность через альтернативные каналы связи.</p>
+          <div class="hygiene"><img src="assets/tip.svg" alt=""><div><h3>Совет по цифровой гигиене</h3><p>Всегда сверяйте контактные данные одногруппников и коллег через официальные чаты и списки групп.</p></div></div>
+        </div>
+      </section>
+      </div>
+    <footer class="report-footer">
+      <div class="footer-actions">
+        <a class="action primary" href="index.html"><img src="assets/reset.svg" alt="">Проверить другое сообщение</a>
+        <button class="action quiet" data-dialog="feedback" type="button"><img src="assets/feedback.svg" alt="">Результат неверный?</button>
+      </div>
+      <p class="icon-line fineprint"><img src="assets/low-info.svg" alt="">Низкий риск не означает, что сообщение гарантированно безопасно.</p>
+    </footer>
+    </article>
+  </main>
+  <dialog id="about"><h2>О проекте</h2><p>Стоп-Спам помогает проверять подозрительные сообщения на мошенничество и фишинг.</p><form method="dialog"><button>Закрыть</button></form></dialog>
+  <dialog id="profile"><h2>Профиль</h2><p>Проверка сообщений доступна без входа в аккаунт.</p><form method="dialog"><button>Закрыть</button></form></dialog>
+  <dialog id="feedback" aria-labelledby="feedback-title">
+    <h2 id="feedback-title">Результат неверный?</h2>
+    <p>Можно вернуться к форме и проверить сообщение ещё раз. В этой версии отправка отзывов недоступна.</p>
+    <form method="dialog"><button>Закрыть</button></form>
+  </dialog>
+</body>
+</html>
