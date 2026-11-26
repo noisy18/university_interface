@@ -1,0 +1,5 @@
+<li class="finding" data-tone="{{ 'warning' if signal.detected else 'success' }}">
+  <span class="finding-icon"><img src="{{ static_url }}/icons/{{ 'block.svg' if signal.detected else 'verify.svg' }}" alt=""></span>
+  <div><p class="finding-state" data-signal-state>{{ "Обнаружен" if signal.detected else "Не обнаружен" }}</p>
+  <h3 data-signal-title>{{ signal.title }}</h3><p data-signal-description>{{ signal.description }}</p></div>
+</li>

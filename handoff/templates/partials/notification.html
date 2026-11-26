@@ -1,0 +1,1 @@
+<p class="notice" data-tone="{{ tone }}"{% if notice_id | default("") %} id="{{ notice_id }}"{% endif %}{% if hide | default(false) %} hidden{% endif %}{% if tone == "error" %} role="alert"{% endif %}>{{ text }}</p>

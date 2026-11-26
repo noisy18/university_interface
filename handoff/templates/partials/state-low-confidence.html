@@ -1,0 +1,5 @@
+{% if result.low_confidence %}
+<div class="uncertain-notice">
+  {% with text = "Уверенность низкая. Уточните контекст и свяжитесь с отправителем через известный канал.", tone = "warning" %}{% include "partials/notification.html" %}{% endwith %}
+</div>
+{% endif %}

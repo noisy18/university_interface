@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+  <main class="report">
+    <div class="report-nav">
+      <a href="{{ upload_url }}">Анализатор</a>
+      {% with label = "Новая проверка", href = upload_url %}{% include "partials/button.html" %}{% endwith %}
+    </div>
+    <header class="report-heading"><h1>Результат проверки</h1></header>
+    {% include "partials/state-result.html" %}
+  </main>
+{% endblock %}

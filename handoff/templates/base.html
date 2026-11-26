@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} — СТОПСПАМ</title>
+  <link rel="stylesheet" href="{{ static_url }}/css/main.css">
+  {% if analyze_url and htmx_url %}<script src="{{ htmx_url }}" defer></script>{% endif %}
+  <script src="{{ static_url }}/js/main.js" defer></script>
+</head>
+<body>
+  <header class="header">
+    <div class="shell header-inner">
+      <a href="{{ upload_url }}" class="logo"><img src="{{ static_url }}/icons/logo.png" alt="Стоп-Спам — главная"></a>
+      <nav aria-label="Основная навигация">
+        <a href="{{ upload_url }}#how">Как это работает</a>
+        <button type="button" data-dialog="about">О проекте</button>
+        <button type="button" class="profile round" data-dialog="profile" aria-label="Профиль"><img src="{{ static_url }}/icons/profile.svg" alt=""></button>
+      </nav>
+    </div>
+  </header>
+  {% block content %}{% endblock %}
+  <dialog id="about" aria-labelledby="about-title"><h2 id="about-title">О проекте</h2><p>Стоп-Спам помогает проверить подозрительное сообщение и выбрать безопасное действие.</p><form method="dialog"><button type="submit">Закрыть</button></form></dialog>
+  <dialog id="profile" aria-labelledby="profile-title"><h2 id="profile-title">Профиль</h2><p>Проверка доступна без входа в аккаунт.</p><form method="dialog"><button type="submit">Закрыть</button></form></dialog>
+</body>
+</html>

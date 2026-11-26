@@ -1,0 +1,10 @@
+{% set classes = button_classes | default("action" ~ (" primary" if primary | default(false) else "")) %}
+{% if href | default("") %}
+<a class="{{ classes }}" href="{{ href }}">{{ label }}</a>
+{% else %}
+<button class="{{ classes }}" type="{{ button_type | default('button') }}"{% if button_id | default("") %} id="{{ button_id }}"{% endif %}{% if label and icon | default("") %} aria-label="{{ label }}"{% endif %}{% if busy | default(false) %} aria-busy="true"{% endif %}{% if disabled | default(false) or busy | default(false) %} disabled{% endif %}{% if submit_form | default("") %} form="{{ submit_form }}"{% endif %}>
+  {% if busy | default(false) %}<span class="loader" data-stage="running">{{ label }}</span>
+  {% elif icon | default("") %}<img src="{{ static_url }}/icons/{{ icon }}" alt="">
+  {% else %}{{ label }}{% endif %}
+</button>
+{% endif %}

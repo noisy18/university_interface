@@ -1,0 +1,10 @@
+<section class="progress-card handoff-progress" data-state="loading" role="status" aria-live="polite">
+  <div class="progress-icon"><img src="{{ static_url }}/icons/analysis-shield.svg" alt=""></div>
+  <h2>Анализируем сообщение</h2>
+  <p class="progress-copy">Проверяем текст на признаки мошенничества.</p>
+  <p class="progress-status"><span class="loader" data-stage="running">Формируем отчёт…</span></p>
+  <div class="progress-actions">
+    {% with label = "Проверка выполняется", busy = true %}{% include "partials/button.html" %}{% endwith %}
+    {% if interactive %}<button class="action quiet" type="button" data-cancel>Отменить проверку</button>{% endif %}
+  </div>
+</section>

@@ -1,0 +1,9 @@
+<section class="progress-card handoff-progress" data-state="error" data-error>
+  <div class="progress-icon"><img src="{{ static_url }}/icons/analysis-shield.svg" alt=""></div>
+  <h2>Не удалось проверить сообщение</h2>
+  {% with text = error_message, tone = "error" %}{% include "partials/notification.html" %}{% endwith %}
+  <details class="saved-message" {% if not message %}hidden{% endif %}><summary>Введённое сообщение</summary><p data-saved-message>{{ message }}</p></details>
+  <div class="progress-actions">
+    {% with label = "Повторить проверку", primary = true, submit_form = "upload-form" if interactive else "", button_type = "submit", href = "" if interactive else upload_url %}{% include "partials/button.html" %}{% endwith %}
+  </div>
+</section>

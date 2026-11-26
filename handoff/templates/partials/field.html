@@ -1,0 +1,8 @@
+<label class="sr-only" for="{{ field_prefix }}-message">Сообщение для проверки</label>
+<textarea class="message-input" id="{{ field_prefix }}-message" name="message"
+  aria-describedby="{{ field_prefix }}-hint {{ field_prefix }}-privacy {{ field_prefix }}-error"
+  {% if field_error | default("") %}aria-invalid="true"{% endif %}
+  placeholder="Вставьте сообщение для проверки…" maxlength="4000" required{% if field_disabled | default(false) %} disabled{% endif %}>{{ message | default("") }}</textarea>
+{% with text = field_error | default(""), tone = "error", notice_id = field_prefix ~ "-error", hide = not (field_error | default("")) %}
+  {% include "partials/notification.html" %}
+{% endwith %}

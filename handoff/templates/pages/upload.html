@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+  <main class="shell main">
+    <section class="intro" aria-labelledby="title">
+      <h1 id="title">Проверь сообщение на мошенничество</h1>
+      <p>Вставьте подозрительное сообщение для анализа<br class="desktop-break"> на мошенничество и фишинг.</p>
+    </section>
+    {% set field_prefix = "upload" %}
+    {% set interactive = true %}
+    {% include "partials/state-empty.html" %}
+    {% if demo %}<label class="icon-line"><input type="checkbox" data-demo-error> Имитировать сбой следующей проверки</label>{% endif %}
+    <section id="analysis-output" class="analysis-output" tabindex="-1" aria-label="Результат анализа"></section>
+    <template id="loading-fragment">{% include "partials/state-loading.html" %}</template>
+    <template id="error-fragment">{% with error_message = "Не удалось получить результат. Повторите проверку.", message = "" %}{% include "partials/state-error.html" %}{% endwith %}</template>
+    {% if not analyze_url %}
+    <template id="result-fragment">{% with result = sample_result %}{% include "partials/state-result.html" %}{% endwith %}</template>
+    <template id="signal-fragment">{% with signal = sample_result.detected_signals[0] %}{% include "partials/signal-card.html" %}{% endwith %}</template>
+    {% endif %}
+    <section id="how" class="how" aria-labelledby="how-title">
+      <div class="section-heading"><h2 id="how-title">Как работает Стоп-Спам</h2><p>Алгоритмический анализ 24/7</p></div>
+      <ol class="steps">
+        <li><span class="step-number" aria-hidden="true">1</span><div><h3>Вставьте сообщение</h3><p>Скопируйте текст без паролей и платёжных реквизитов.</p></div></li>
+        <li><span class="step-number" aria-hidden="true">2</span><div><h3>Запустите проверку</h3><p>Сервис проверит текст на признаки фишинга и давления.</p></div></li>
+        <li><span class="step-number" aria-hidden="true">3</span><div><h3>Получите рекомендации</h3><p>Посмотрите уровень риска, причины и порядок действий.</p></div></li>
+      </ol>
+    </section>
+    {% if demo %}<p class="demo-links"><a href="{{ states_url }}">Посмотреть состояния интерфейса</a></p>{% endif %}
+  </main>
+{% endblock %}

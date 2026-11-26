@@ -1,0 +1,9 @@
+<section class="result-state" data-state="result" aria-label="Результат проверки">
+  <figure class="snippet">
+    <span class="quote-icon"><img src="{{ static_url }}/icons/high-quote.svg" alt=""></span>
+    <div class="snippet-body"><figcaption>Проверенное сообщение</figcaption><blockquote data-checked-message>{{ result.message }}</blockquote></div>
+  </figure>
+  {% with text = "Учебный результат. Оценка приведена для демонстрации интерфейса.", tone = "warning", hide = not result.is_demo, notice_id = "" %}{% include "partials/notification.html" %}{% endwith %}
+  <p class="notice" data-tone="success"><span class="loader" data-stage="done">Проверка завершена</span></p>
+  {% include "partials/result-card.html" %}
+</section>

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+{% set interactive = false %}
+  <main class="shell main gallery">
+    <h1>Состояния интерфейса</h1>
+    <nav class="state-nav" aria-label="Состояния">
+      <a href="#empty">Пустое</a><a href="#loading">Загрузка</a><a href="#error">Ошибка</a><a href="#result">Результат</a><a href="#uncertain">Низкая уверенность</a>
+    </nav>
+    <section id="empty" class="gallery-section"><h2>Пустое состояние</h2>
+      {% with field_prefix = "gallery" %}{% include "partials/state-empty.html" %}{% endwith %}
+      <a class="action" href="{{ upload_url }}">Открыть рабочую форму</a>
+    </section>
+    <section id="loading" class="gallery-section"><h2>Загрузка</h2>{% include "partials/state-loading.html" %}</section>
+    <section id="error" class="gallery-section"><h2>Ошибка</h2>
+      {% with interactive = false, error_message = "Учебный пример сбоя. Введённый текст сохранён.", message = sample_result.message %}{% include "partials/state-error.html" %}{% endwith %}
+    </section>
+    <section id="result" class="gallery-section"><h2>Результат</h2>
+      {% with result = sample_result %}{% include "partials/state-result.html" %}{% endwith %}
+    </section>
+    <section id="uncertain" class="gallery-section"><h2>Низкая уверенность</h2>
+      {% with result = uncertain_result %}{% include "partials/state-result.html" %}{% endwith %}
+    </section>
+  </main>
+{% endblock %}

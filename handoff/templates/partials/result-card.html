@@ -1,0 +1,28 @@
+<article class="verdict" data-risk="{{ result.risk_level }}">
+  <header class="verdict-banner">
+    <div class="verdict-summary">
+      <span class="verdict-icon"><img data-verdict-icon data-icons="{{ static_url }}/icons/" src="{{ static_url }}/icons/{{ 'low-shield.svg' if result.risk_level == 'low' else ('warning.svg' if result.risk_level == 'high' else 'block.svg') }}" alt=""></span>
+      <div>{% include "partials/risk-indicator.html" %}
+        <h2 data-result-verdict>{{ verdict_labels[result.verdict] }}</h2>
+        <p class="confidence" data-confidence>{% if result.confidence is none %}Уверенность модели недоступна{% else %}Уверенность модели{% if result.is_demo %} (учебный пример){% endif %} — {{ (result.confidence * 100) | round | int }}%{% endif %}</p>
+      </div>
+    </div>
+  </header>
+  <p class="verdict-intro" data-result-explanation>{{ result.explanation }}</p>
+  {% include "partials/state-low-confidence.html" %}
+  <div class="report-grid handoff-report-grid">
+    <section class="report-column"><h3 class="report-subtitle">Обнаруженные признаки</h3>
+      <ul class="findings" data-result-signals{% if not result.detected_signals %} hidden{% endif %}>
+        {% for signal in result.detected_signals %}{% include "partials/signal-card.html" %}{% endfor %}
+      </ul>
+      <p data-no-signals{% if result.detected_signals %} hidden{% endif %}>Нет данных о признаках в этом отчёте.</p>
+    </section>
+    <section class="report-column"><h3 class="report-subtitle">Что рекомендуем сделать</h3>
+      <ul class="findings" data-result-recommendations>{% for recommendation in result.recommendations %}<li class="finding">{{ recommendation }}</li>{% endfor %}</ul>
+    </section>
+  </div>
+  <footer class="report-footer">
+    {% with label = "Проверить другое сообщение", primary = true, href = upload_url %}{% include "partials/button.html" %}{% endwith %}
+    <small class="fineprint">Оценка текста не гарантирует безопасность сообщения.</small>
+  </footer>
+</article>

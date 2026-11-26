@@ -1,0 +1,21 @@
+<p id="{{ field_prefix }}-hint" class="message-hint">Подходит текст из SMS, мессенджера, почты или соцсети.</p>
+<form id="{{ field_prefix }}-form" class="card handoff-form" data-state="empty" method="post"
+  {% if interactive %}data-analyzer{% endif %}
+  {% if analyze_url and interactive %}action="{{ analyze_url }}" hx-post="{{ analyze_url }}"
+    hx-target="#analysis-output" hx-swap="innerHTML" hx-disabled-elt="find button" hx-sync="this:drop"{% endif %}>
+  {% include "partials/field.html" %}
+  <div class="toolbar">
+    <p class="privacy" id="{{ field_prefix }}-privacy"><img src="{{ static_url }}/icons/lock.svg" alt="">Не отправляйте пароли и коды из SMS</p>
+    <div class="actions">
+      <output for="{{ field_prefix }}-message" data-counter>0 / 4000</output>
+      {% with label = "Проверить сообщение", button_type = "submit", icon = "send.svg", button_classes = "send round action primary", disabled = not interactive or not analyze_url %}{% include "partials/button.html" %}{% endwith %}
+    </div>
+  </div>
+</form>
+{% if interactive %}
+<div class="presets handoff-presets">
+  <p>Не знаете, что проверить? Попробуйте пример:</p>
+  <button type="button" data-example="{{ examples.job }}"><img src="{{ static_url }}/icons/job.svg" alt="">Подозрительная вакансия</button>
+  <button type="button" data-example="{{ examples.education }}"><img src="{{ static_url }}/icons/education.svg" alt="">Сообщение от деканата</button>
+</div>
+{% endif %}
